@@ -1,6 +1,8 @@
 import pygame, sys
 from pygame.locals import *
 
+from blockles_game import *
+
 # Initialize colors
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
