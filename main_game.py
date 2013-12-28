@@ -16,7 +16,6 @@ def main():
     pygame.init()
     DISPLAYSURF = pygame.display.set_mode((400, 300))
     pygame.display.set_caption('Hello World!')
-    img = pygame.image.load('giggle.png')
 
     xpos = 10
     ypos = 10
