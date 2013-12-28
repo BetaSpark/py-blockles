@@ -16,11 +16,14 @@ class BlocklesGame:
     SQUARE_PIECE    = [ [0,5], [0,6], [1,5], [1,6] ]
     S_PIECE         = [ [0,5], [1,5], [1,4], [0,6] ]
     Z_PIECE         = [ [0,5], [1,5], [0,4], [1,6] ]
+    BLANK           = 'A'
 
     def __init__(self):
         self.board = [['A' for y in range(10)] for x in range(20)]
         self.current_piece = -1
-        self.current_coord = [] 
+        self.current_coord = []
+        self.speed = 500 # Higher is slower
+        self.generate_piece()
 
     def generate_piece(self):
         self.current_piece = int(random.random()*7)
@@ -40,12 +43,19 @@ class BlocklesGame:
             self.current_coord = BlocklesGame.Z_PIECE[:]
   
     def update(self):
-        self.generate_piece()
-        for tetr in self.current_coord:
+        self.move_piece_down() 
+        self.set_board(self.current_coord, self.current_piece)
+
+    def move_piece_down(self):
+        self.set_board(self.current_coord, BlocklesGame.BLANK)
+        for elem in self.current_coord:
+            elem[0] += 1
+
+    def set_board(self, piece, piece_id):
+        for tetr in piece:
             x_coord = tetr[0]
             y_coord = tetr[1]
-            self.board[x_coord][y_coord] = str(self.current_piece)
-
+            self.board[x_coord][y_coord] = piece_id
 
 
 

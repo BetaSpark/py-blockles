@@ -16,8 +16,12 @@ def terminate():
 
 def main():
     pygame.init()
-    DISPLAYSURF = pygame.display.set_mode((400, 300))
-    pygame.display.set_caption('Hello World!')
+    DISPLAYSURF = pygame.display.set_mode((200, 400))
+    pygame.display.set_caption('Blockles rev 0.1')
+
+    game = BlocklesGame()
+    last_time = 0
+    current_time = 0
 
     xpos = 10
     ypos = 10
@@ -42,7 +46,17 @@ def main():
                 elif event.key == K_DOWN:
                     ypos += 5
         
-        pygame.draw.circle(DISPLAYSURF, BLUE, (xpos, ypos), 20, 0)
+        current_time = pygame.time.get_ticks()
+        if (current_time - last_time) >= game.speed:
+            last_time = current_time
+            game.update()
+
+        # Draw the board
+        for y_coord in range(len(game.board)):
+            for x_coord in range(len(game.board[y_coord])):
+                if game.board[y_coord][x_coord] != 'A':
+                    tile = pygame.Rect(x_coord*20, y_coord*20, 20, 20)       
+                    pygame.draw.rect(DISPLAYSURF, BLUE, tile, 1)
 
         pygame.display.update()
 
