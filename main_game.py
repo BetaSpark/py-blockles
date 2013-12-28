@@ -9,6 +9,7 @@ WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
+DOWN = [1, 0]
 
 def terminate():
     pygame.quit()
@@ -49,7 +50,8 @@ def main():
         current_time = pygame.time.get_ticks()
         if (current_time - last_time) >= game.speed:
             last_time = current_time
-            game.update()
+            game.move_piece(DOWN)
+        game.update()        
 
         # Draw the board
         for y_coord in range(len(game.board)):

@@ -42,20 +42,21 @@ class BlocklesGame:
         elif self.current_piece == 6:
             self.current_coord = BlocklesGame.Z_PIECE[:]
   
-    def update(self):
-        self.move_piece_down() 
+    def update(self): 
         self.set_board(self.current_coord, self.current_piece)
 
-    def move_piece_down(self):
+    def move_piece(self, direction):
         self.set_board(self.current_coord, BlocklesGame.BLANK)
         for elem in self.current_coord:
-            elem[0] += 1
+            elem[0] += direction[0]
+            elem[1] += direction[1]
 
     def set_board(self, piece, piece_id):
         for tetr in piece:
             x_coord = tetr[0]
             y_coord = tetr[1]
             self.board[x_coord][y_coord] = piece_id
+
 
 
 
