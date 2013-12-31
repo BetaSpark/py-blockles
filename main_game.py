@@ -9,7 +9,7 @@ WHITE = (255, 255, 255)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
-DOWN = [1, 0]
+
 
 def terminate():
     pygame.quit()
@@ -39,18 +39,20 @@ def main():
                 if event.key == K_ESCAPE:
                     terminate();
                 elif event.key == K_RIGHT:                
-                    xpos += 5
+                    game.move_piece(BlocklesGame.RIGHT)
                 elif event.key == K_LEFT:
-                    xpos -= 5
+                    game.move_piece(BlocklesGame.LEFT)
                 elif event.key == K_UP:
                     ypos -= 5
                 elif event.key == K_DOWN:
-                    ypos += 5
+                    game.move_piece(BlocklesGame.DOWN)
+                elif event.key == K_SPACE:
+                    game.jump_down()
         
         current_time = pygame.time.get_ticks()
         if (current_time - last_time) >= game.speed:
             last_time = current_time
-            game.move_piece(DOWN)
+            game.move_piece(BlocklesGame.DOWN)
         game.update()        
 
         # Draw the board
